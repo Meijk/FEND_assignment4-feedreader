@@ -33,15 +33,15 @@ $(function() {
 
         // Tests DOM event to make sure main menu is hidden by default
         it('is hidden by default', function() {
-            expect(body.classList.value).toBe('menu-hidden');
+            expect(body.classList).toContain('menu-hidden');
         });
         // Sets click triggers to simulate user interaction & checks functionality
         it ('shows and hides on menu icon click', function() {
             $('.menu-icon-link').trigger('click');
-            expect(body.classList.value).not.toBe('menu-hidden');
+            expect(body.classList).not.toContain('menu-hidden');
 
             $('.menu-icon-link').trigger('click');
-            expect(body.classList.value).toBe('menu-hidden');
+            expect(body.classList).toContain('menu-hidden');
         });
     });
 
@@ -55,7 +55,7 @@ $(function() {
         });
         // Checks for the presence of .entry elements, i.e. feed entries have been loaded
         it('are present', function(done) {
-            expect(document.querySelectorAll('.entry').length).not.toBe(0);
+            expect(document.querySelectorAll('.feed .entry').length).not.toBe(0);
             done();
         });
     });
@@ -73,8 +73,8 @@ $(function() {
                 entriesFeed1 = feed.innerText;
                 loadFeed(1, function() {
                     entriesFeed2 = feed.innerText;
+                    done();
                 });
-                done();
             });
         });
         // Compare variables to assure reader successfully loads Feed2 entries
